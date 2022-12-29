@@ -13,13 +13,14 @@
       </div>
     </div>
     <div class="booking-part-right">
-      <%= simple_form_for @booking do |f| %>
+      <%= simple_form_for @booking, data: { controller: 'flatpickr' } do |f| %>
         <%= f.input :bedrooms, collection: ["Studio", "1", "2", "3", "4", "5"], as: :radio_buttons, input_html: { class: 'bedrooms-input' } %>
         <%= f.input :bathrooms, collection: ["1", "2", "3", "4", "5", "6+"], as: :radio_buttons, input_html: { class: 'bathrooms-input' } %>
         <%= f.input :cleaning_type, collection: ["Standard", "Standard +", "Deep"], as: :radio_buttons, input_html: { class: 'cleaning-input' } %>
         <%= f.input :number_of_visits, collection: 1..5, as: :radio_buttons, input_html: { class: 'number-input' } %>
-        <%= f.input :start_date, label: "Date" %>
-        <%= f.button :submit %>
+        <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startTime" } } %>
+        <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endTime" }, id: 'end_time' } %>
+        <%= f.button :submit, class: 'my-standard-button' %>
       <% end %>
     </div>
   </div>
