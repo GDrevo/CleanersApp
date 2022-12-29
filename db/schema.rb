@@ -10,9 +10,74 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_29_134522) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_29_135153) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "status"
+    t.string "cleaning_type"
+    t.integer "price"
+    t.time "estimated_time"
+    t.integer "number_of_visits"
+    t.string "address"
+    t.integer "size"
+    t.integer "floor"
+    t.string "bedrooms"
+    t.integer "bathrooms"
+    t.string "city"
+    t.integer "zipcode"
+    t.string "country"
+    t.string "further_info"
+    t.string "house_type"
+    t.bigint "user_id", null: false
+    t.bigint "cleaner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cleaner_id"], name: "index_bookings_on_cleaner_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "cleaners", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "description"
+    t.integer "phone"
+    t.string "gender"
+    t.string "location"
+    t.string "qualification"
+    t.string "experience"
+    t.integer "days_per_week"
+    t.boolean "work_permit?"
+    t.boolean "full_time?"
+    t.boolean "confirmed?"
+    t.index ["email"], name: "index_cleaners_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_cleaners_on_reset_password_token", unique: true
+  end
+
+  create_table "houses", force: :cascade do |t|
+    t.string "type"
+    t.string "address"
+    t.string "city"
+    t.integer "zipcode"
+    t.string "country"
+    t.integer "size"
+    t.integer "floor"
+    t.string "bedrooms"
+    t.integer "bathrooms"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_houses_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +87,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_29_134522) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.integer "phone"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "cleaners"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "houses", "users"
 end

@@ -1,0 +1,26 @@
+<div class="booking-container">
+  <h1>Make a Booking</h1>
+  <h3>Fill out the form below to book one of our services</h3>
+  <div class="booking-part">
+    <div class="booking-part-left">
+      <div class="left-cleaning-details">
+        <h2>Cleaning Details</h2>
+        <p>Please provide the following details</p>
+      </div>
+      <div class="left-time-and-date">
+        <h2>Book a Date and Time</h2>
+        <p>Please select the desired number of visits and book the date for the cleaner's first visit</p>
+      </div>
+    </div>
+    <div class="booking-part-right">
+      <%= simple_form_for @booking do |f| %>
+        <%= f.input :bedrooms, collection: ["Studio", "1", "2", "3", "4", "5"], as: :radio_buttons, input_html: { class: 'bedrooms-input' } %>
+        <%= f.input :bathrooms, collection: ["1", "2", "3", "4", "5", "6+"], as: :radio_buttons, input_html: { class: 'bathrooms-input' } %>
+        <%= f.input :cleaning_type, collection: ["Standard", "Standard +", "Deep"], as: :radio_buttons, input_html: { class: 'cleaning-input' } %>
+        <%= f.input :number_of_visits, collection: 1..5, as: :radio_buttons, input_html: { class: 'number-input' } %>
+        <%= f.input :start_date, label: "Date" %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+  </div>
+</div>
