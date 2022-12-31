@@ -11,16 +11,66 @@
         <h2>Book a Date and Time</h2>
         <p>Please select the desired number of visits and book the date for the cleaner's first visit</p>
       </div>
+      <div class="left-account-info">
+        <h2>Account Information</h2>
+        <p>Please provide the following information</p>
+      </div>
     </div>
-    <div class="booking-part-right">
+    <div class="booking-part-right" data-controller="calculate-price">
       <%= simple_form_for @booking, data: { controller: 'flatpickr' } do |f| %>
-        <%= f.input :bedrooms, collection: ["Studio", "1", "2", "3", "4", "5"], as: :radio_buttons, input_html: { class: 'bedrooms-input' } %>
-        <%= f.input :bathrooms, collection: ["1", "2", "3", "4", "5", "6+"], as: :radio_buttons, input_html: { class: 'bathrooms-input' } %>
-        <%= f.input :cleaning_type, collection: ["Standard", "Standard +", "Deep"], as: :radio_buttons, input_html: { class: 'cleaning-input' } %>
-        <%= f.input :number_of_visits, collection: 1..5, as: :radio_buttons, input_html: { class: 'number-input' } %>
-        <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startTime" } } %>
-        <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endTime" }, id: 'end_time' } %>
-        <%= f.button :submit, class: 'my-standard-button' %>
+        <div class="form-part-up" data-calculate-price-target="choices">
+          <%= f.input :bedrooms, collection: ["Studio", "1", "2", "3", "4", "5"], as: :radio_buttons, input_html: { class: 'bedrooms-input' } %>
+          <%= f.input :bathrooms, collection: ["1", "2", "3", "4", "5", "6+"], as: :radio_buttons, input_html: { class: 'bathrooms-input' } %>
+          <%= f.input :size, collection: ["0 < 25m²", "25 < 35", "35 < 55", "55 < 80", "80 < 120", "120m² +"], as: :radio_buttons, input_html: { class: 'bedrooms-input' } %>
+          <%= f.input :cleaning_type, collection: ["Standard", "Standard +", "Deep"], as: :radio_buttons, input_html: { class: 'cleaning-input' } %>
+          <div class="estimated-up">
+          <div class="estimated-up-left">
+            <p><strong>Estimated Cleaning Time</strong></p>
+            <p></p>
+          </div>
+          <div class="estimated-up-right">
+            <p><strong>Fee</strong></p>
+            <p></p>
+          </div>
+          </div>
+        </div>
+        <div class="form-part-middle">
+          <%= f.input :number_of_visits, collection: 1..5, as: :radio_buttons, input_html: { class: 'number-input' } %>
+          <div class="form-part-middle-dates">
+            <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startTime" } } %>
+            <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endTime" }, id: 'end_time' } %>
+          </div>
+        </div>
+        <% if user_signed_in? %>
+          <div class="form-part-down">
+            <div class="form-down-address">
+              <%= f.input :address %>
+              <%= f.input :zipcode, as: :integer %>
+              <%= f.input :city %>
+              <%= f.input :country, as: :string %>
+            </div>
+            <%= f.input :further_info, as: :text %>
+          </div>
+        <% else %>
+          <div class="form-part-down">
+              <p>Already have an account? Please <%= link_to "sign in", new_user_session_path %> first.</p>
+            <div class="form-down-address">
+              <%= f.input :new_user_name %>
+              <%= f.input :new_user_phone %>
+              <%= f.input :new_user_email %>
+              <%= f.input :new_user_password %>
+              <%= f.input :address %>
+              <%= f.input :zipcode, as: :integer %>
+              <%= f.input :city %>
+              <%= f.input :country, as: :string %>
+            </div>
+            <%= f.input :further_info, as: :text %>
+          </div>
+        <% end %>
+        <div class="form-part-summary">
+
+          <%= f.button :submit, class: 'my-standard-button' %>
+        </div>
       <% end %>
     </div>
   </div>
