@@ -18,19 +18,19 @@
     </div>
     <div class="booking-part-right" data-controller="calculate-price">
       <%= simple_form_for @booking, data: { controller: 'flatpickr' } do |f| %>
-        <div class="form-part-up" data-calculate-price-target="choices">
-          <%= f.input :bedrooms, collection: ["Studio", "1", "2", "3", "4", "5"], as: :radio_buttons, input_html: { class: 'bedrooms-input' } %>
-          <%= f.input :bathrooms, collection: ["1", "2", "3", "4", "5", "6+"], as: :radio_buttons, input_html: { class: 'bathrooms-input' } %>
-          <%= f.input :size, collection: ["0 < 25m²", "25 < 35", "35 < 55", "55 < 80", "80 < 120", "120m² +"], as: :radio_buttons, input_html: { class: 'bedrooms-input' } %>
-          <%= f.input :cleaning_type, collection: ["Standard", "Standard +", "Deep"], as: :radio_buttons, input_html: { class: 'cleaning-input' } %>
+        <div class="form-part-up">
+          <%= f.input :bedrooms, collection: ["Studio", "1", "2", "3", "4", "5"], as: :radio_buttons, input_html: { class: 'bedrooms-input', data: {calculate_price_target: "bedroom", action: "change->calculate-price#calculateprice"} } %>
+          <%= f.input :bathrooms, collection: ["1", "2", "3", "4", "5", "6+"], as: :radio_buttons, input_html: { class: 'bathrooms-input', data: {calculate_price_target: "bathroom", action: "change->calculate-price#calculateprice"} } %>
+          <%= f.input :size, collection: ["0 < 25m²", "25 < 35", "35 < 55", "55 < 80", "80 < 120", "120m² +"], as: :radio_buttons, input_html: { class: 'bedrooms-input', data: {calculate_price_target: "size", action: "change->calculate-price#calculateprice"} } %>
+          <%= f.input :cleaning_type, collection: ["Standard", "Standard +", "Deep"], as: :radio_buttons, input_html: { class: 'cleaning-input', data: {calculate_price_target: "cleaning", action: "change->calculate-price#calculateprice"} } %>
           <div class="estimated-up">
           <div class="estimated-up-left">
             <p><strong>Estimated Cleaning Time</strong></p>
-            <p></p>
+            <p data-calculate_price_target="estimatedtime"> </p>
           </div>
           <div class="estimated-up-right">
             <p><strong>Fee</strong></p>
-            <p></p>
+            <p data-calculate-price-target="estimatedprice"> </p>
           </div>
           </div>
         </div>
