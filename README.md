@@ -1,1 +1,5 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+<h1>HostEasy</h1>
+<br>
+<p>
+  A concierge application for AirBnB-like platforms tenants who want to book cleaners and other services for their flat.
+</p>
