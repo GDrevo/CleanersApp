@@ -30,14 +30,14 @@
           </div>
           <div class="estimated-up-right">
             <h5>Fee</h5>
-            <p data-calculate-price-target="estimatedprice"> </p>
+            <p data-calculate-price-target="estimatedprice" class="fee-p"> </p>
           </div>
           </div>
         </div>
         <div class="form-part-middle">
-          <%= f.input :number_of_visits, collection: 1..5, as: :radio_buttons, input_html: { class: 'number-input' } %>
+          <%= f.input :number_of_visits, collection: 1..5, as: :radio_buttons, input_html: { class: 'number-input', data: {calculate_price_target: "number", action: "change->calculate-price#calculateestimation"} }, checked: "1" %>
           <div class="form-part-middle-dates">
-            <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startTime" } } %>
+            <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startTime", calculate_price_target:"startDate", action: "change->calculate-price#calculateestimation" } } %>
             <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endTime" }, id: 'end_time' } %>
           </div>
         </div>
@@ -99,7 +99,7 @@
             </div>
             <div class="summary-item">
               <h5>Fee</h5>
-              <p data-calculate-price-target="sumtot"></p>
+              <p data-calculate-price-target="sumtot" class="fee-p"></p>
             </div>
           </div>
           <%= f.button :submit, class: 'my-standard-button' %>

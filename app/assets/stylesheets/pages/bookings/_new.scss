@@ -50,12 +50,15 @@ fieldset {
   width: 50%;
   p {
     margin: 0;
-    font-weight: bold;
   }
   h5 {
     font-weight: 400;
     margin: 0;
   }
+}
+
+.fee-p {
+  font-weight: bold;
 }
 
 .form-part-middle {
@@ -254,5 +257,14 @@ fieldset {
     input {
       background-color: white;
     }
+  }
+}
+
+.summary-items {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: start;
+  .summary-item {
+    width: 25%;
   }
 }
