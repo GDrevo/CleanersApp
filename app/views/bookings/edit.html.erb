@@ -1,0 +1,11 @@
+<div class="edit-cleaner-container">
+  <h1>Choose your cleaner</h1>
+  <h3>Check the description of the available cleaners in your area, and pick the one you want</h3>
+  <div class="cleaner-cards">
+    <% @cleaners.each do |cleaner| %>
+      <div class="cleaner-card">
+        <%= render "cleanercard", cleaner: cleaner %>
+      </div>
+    <% end %>
+  </div>
+</div>
