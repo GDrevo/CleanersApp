@@ -19,17 +19,17 @@
     <div class="booking-part-right" data-controller="calculate-price">
       <%= simple_form_for @booking, data: { controller: 'flatpickr' } do |f| %>
         <div class="form-part-up">
-          <%= f.input :bedrooms, collection: ["Studio", "1", "2", "3", "4", "5"], as: :radio_buttons, input_html: { class: 'bedrooms-input', data: {calculate_price_target: "bedroom", action: "change->calculate-price#calculateprice"} } %>
-          <%= f.input :bathrooms, collection: ["1", "2", "3", "4", "5", "6+"], as: :radio_buttons, input_html: { class: 'bathrooms-input', data: {calculate_price_target: "bathroom", action: "change->calculate-price#calculateprice"} } %>
-          <%= f.input :size, collection: ["0 < 25m²", "25 < 35", "35 < 55", "55 < 80", "80 < 120", "120m² +"], as: :radio_buttons, input_html: { class: 'bedrooms-input', data: {calculate_price_target: "size", action: "change->calculate-price#calculateprice"} } %>
-          <%= f.input :cleaning_type, collection: ["Standard", "Standard +", "Deep"], as: :radio_buttons, input_html: { class: 'cleaning-input', data: {calculate_price_target: "cleaning", action: "change->calculate-price#calculateprice"} } %>
+          <%= f.input :bedrooms, collection: ["Studio", "1", "2", "3", "4", "5"], as: :radio_buttons, input_html: { class: 'bedrooms-input', data: {calculate_price_target: "bedroom", action: "change->calculate-price#calculateestimation"} }, checked: "Studio" %>
+          <%= f.input :bathrooms, collection: ["1", "2", "3", "4", "5", "6+"], as: :radio_buttons, input_html: { class: 'bathrooms-input', data: {calculate_price_target: "bathroom", action: "change->calculate-price#calculateestimation"} }, checked: "1" %>
+          <%= f.input :size, collection: ["0 < 25m²", "25 < 35", "35 < 55", "55 < 80", "80 < 120", "120m² +"], as: :radio_buttons, input_html: { class: 'bedrooms-input', data: {calculate_price_target: "size", action: "change->calculate-price#calculateestimation"} }, checked: "0 < 25m²" %>
+          <%= f.input :cleaning_type, collection: ["Standard", "Standard +", "Deep"], as: :radio_buttons, input_html: { class: 'cleaning-input', data: {calculate_price_target: "cleaning", action: "change->calculate-price#calculateestimation"} }, checked: "Standard" %>
           <div class="estimated-up">
           <div class="estimated-up-left">
-            <p><strong>Estimated Cleaning Time</strong></p>
-            <p data-calculate_price_target="estimatedtime"> </p>
+            <h5>Estimated Cleaning Time</h5>
+            <p data-calculate-price-target="estimatedtime"> </p>
           </div>
           <div class="estimated-up-right">
-            <p><strong>Fee</strong></p>
+            <h5>Fee</h5>
             <p data-calculate-price-target="estimatedprice"> </p>
           </div>
           </div>
@@ -68,7 +68,40 @@
           </div>
         <% end %>
         <div class="form-part-summary">
-
+          <div class="summary-items">
+            <div class="summary-item">
+              <h5>Bedrooms</h5>
+              <p data-calculate-price-target="sumbed"></p>
+            </div>
+            <div class="summary-item">
+              <h5>Bathrooms</h5>
+              <p data-calculate-price-target="sumbat"></p>
+            </div>
+            <div class="summary-item">
+              <h5>Cleaning Type</h5>
+              <p data-calculate-price-target="sumtyp"></p>
+            </div>
+            <div class="summary-item">
+              <h5>Cleaning Time</h5>
+              <p data-calculate-price-target="sumtim"></p>
+            </div>
+            <div class="summary-item">
+              <h5>Number of Visits</h5>
+              <p data-calculate-price-target="sumnum"></p>
+            </div>
+            <div class="summary-item">
+              <h5>Date</h5>
+              <p data-calculate-price-target="sumdat"></p>
+            </div>
+            <div class="summary-item">
+              <h5>Time</h5>
+              <p data-calculate-price-target="sumhou"></p>
+            </div>
+            <div class="summary-item">
+              <h5>Fee</h5>
+              <p data-calculate-price-target="sumtot"></p>
+            </div>
+          </div>
           <%= f.button :submit, class: 'my-standard-button' %>
         </div>
       <% end %>

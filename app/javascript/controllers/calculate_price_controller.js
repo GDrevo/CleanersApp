@@ -2,105 +2,192 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="calculate-price"
 export default class extends Controller {
-  static targets = ["bedroom", "bathroom", "size", "cleaning", "estimatedtime", "estimatedprice"]
+  static targets = ["bedroom", "bathroom", "size", "cleaning", "estimatedtime", "estimatedprice", "sumbed", "sumbat", "sumtyp", "sumtim", "sumnum", "sumdat", "sumhou", "sumtot"]
 
   connect() {
+    this.calculateestimation()
   }
 
-  calculateprice() {
-    // console.log(this.estimatedpriceTarget)
-    let estimatedprice = 0
-    // let bedroomprice = this.bedroom()
-    console.log(this.bedroom())
-    // console.log(estimatedprice)
-    // this.estimatedpriceTarget.innerHTML = estimatedprice
+  calculateestimation() {
+    const estimatedprice = this.bedroomprice() + this.bathroomprice() + this.sizeprice() + this.cleaningprice()
+    this.estimatedpriceTarget.innerHTML = estimatedprice + "€"
+    this.sumtotTarget.innerHTML = estimatedprice + "€"
+    const estimatedtime = this.bedroomtime() + this.bathroomtime() + this.sizetime() + this.cleaningtime()
+    this.estimatedtimeTarget.innerHTML = estimatedtime + "hr(s)"
+    this.sumtimTarget.innerHTML = estimatedtime + "hr(s)"
   }
 
-  bedroom() {
-    this.bedroomTargets.forEach(target => {
-      if (target.checked) {
-        if (target.value == "Studio") {
-          console.log(0)
-          return 0
-        }
-        if (target.value == "1") {
-          console.log(10)
-          return 10
-        }
-        if (target.value == "2") {
-          console.log(20)
-          return 20
-        }
-        if (target.value == "3") {
-          console.log(30)
-          return 30
-        }
-        if (target.value == "4") {
-          console.log(40)
-          return 40
-        }
-        if (target.value == "5") {
-          console.log(50)
-          return 50
-        }
-      }
-    });
-  }
-
-  bathroom(event) {
-    if (event.srcElement.value == "1") {
+  bedroomprice() {
+    const selected = this.bedroomTargets.find(function (target) {
+      return target.checked
+    })
+    if (selected.value == "Studio") {
       return 0
     }
-    if (event.srcElement.value == "2") {
-      return 25
+    if (selected.value == "1") {
+      return 10
     }
-    if (event.srcElement.value == "3") {
+    if (selected.value == "2") {
+      return 20
+    }
+    if (selected.value == "3") {
+      return 30
+    }
+    if (selected.value == "4") {
+      return 40
+    }
+    if (selected.value == "5") {
       return 50
     }
-    if (event.srcElement.value == "4") {
+  }
+
+  bedroomtime() {
+    const selected = this.bedroomTargets.find(function (target) {
+      return target.checked
+    })
+    if (selected.value == "Studio") {
+      return 0
+    }
+    if (selected.value == "1") {
+      return 0.5
+    }
+    if (selected.value == "2") {
+      return 1
+    }
+    if (selected.value == "3") {
+      return 1.5
+    }
+    if (selected.value == "4") {
+      return 2
+    }
+    if (selected.value == "5") {
+      return 3
+    }
+  }
+
+  bathroomprice() {
+    const selected = this.bathroomTargets.find(function (target) {
+      return target.checked
+    })
+    if (selected.value == "1") {
+      return 0
+    }
+    if (selected.value == "2") {
+      return 25
+    }
+    if (selected.value == "3") {
+      return 50
+    }
+    if (selected.value == "4") {
       return 80
     }
-    if (event.srcElement.value == "5") {
+    if (selected.value == "5") {
       return 120
     }
-    if (event.srcElement.value == "6+") {
+    if (selected.value == "6+") {
       return 150
     }
-    return 0
   }
 
-  size(event) {
-    if (event.srcElement.value == "0 < 25m²") {
+  bathroomtime() {
+    const selected = this.bathroomTargets.find(function (target) {
+      return target.checked
+    })
+    if (selected.value == "1") {
       return 0
     }
-    if (event.srcElement.value == "25 < 35") {
-      return 25
+    if (selected.value == "2") {
+      return 0.5
     }
-    if (event.srcElement.value == "35 < 55") {
-      return 50
+    if (selected.value == "3") {
+      return 1
     }
-    if (event.srcElement.value == "55 < 80") {
-      return 75
+    if (selected.value == "4") {
+      return 1.5
     }
-    if (event.srcElement.value == "80 < 120") {
-      return 100
+    if (selected.value == "5") {
+      return 2
     }
-    if (event.srcElement.value == "120m² +") {
-      return 125
+    if (selected.value == "6+") {
+      return 2.5
     }
-    return 0
   }
 
-  cleaning(event) {
-    if (event.srcElement.value == "Standard") {
+  sizeprice() {
+    const selected = this.sizeTargets.find(function (target) {
+      return target.checked
+    })
+    if (selected.value == "0 < 25m²") {
+      return 0
+    }
+    if (selected.value == "25 < 35") {
+      return 10
+    }
+    if (selected.value == "35 < 55") {
+      return 20
+    }
+    if (selected.value == "55 < 80") {
+      return 30
+    }
+    if (selected.value == "80 < 120") {
+      return 40
+    }
+    if (selected.value == "120m² +") {
       return 50
     }
-    if (event.srcElement.value == "Standard +") {
+  }
+
+  sizetime() {
+    const selected = this.sizeTargets.find(function (target) {
+      return target.checked
+    })
+    if (selected.value == "0 < 25m²") {
+      return 0
+    }
+    if (selected.value == "25 < 35") {
+      return 0.5
+    }
+    if (selected.value == "35 < 55") {
+      return 1
+    }
+    if (selected.value == "55 < 80") {
+      return 1.5
+    }
+    if (selected.value == "80 < 120") {
+      return 2
+    }
+    if (selected.value == "120m² +") {
+      return 2.5
+    }
+  }
+
+  cleaningprice() {
+    const selected = this.cleaningTargets.find(function (target) {
+      return target.checked
+    })
+    if (selected.value == "Standard") {
+      return 50
+    }
+    if (selected.value == "Standard +") {
       return 100
     }
-    if (event.srcElement.value == "Deep") {
+    if (selected.value == "Deep") {
       return 250
     }
-    return 0
+  }
+
+  cleaningtime() {
+    const selected = this.cleaningTargets.find(function (target) {
+      return target.checked
+    })
+    if (selected.value == "Standard") {
+      return 2
+    }
+    if (selected.value == "Standard +") {
+      return 5
+    }
+    if (selected.value == "Deep") {
+      return 8
+    }
   }
 }

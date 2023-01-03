@@ -41,6 +41,23 @@ fieldset {
   margin-bottom: 50px;
 }
 
+.estimated-up {
+  display: flex;
+  text-align: start;
+}
+
+.estimated-up-left, .estimated-up-right {
+  width: 50%;
+  p {
+    margin: 0;
+    font-weight: bold;
+  }
+  h5 {
+    font-weight: 400;
+    margin: 0;
+  }
+}
+
 .form-part-middle {
   padding: 50px;
   background-color: white;
