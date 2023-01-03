@@ -7,9 +7,13 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-    @user = User.new(name: user_params[:new_user_name], phone: user_params[:new_user_phone], email: user_params[:new_user_email], password: user_params[:new_user_password])
-    @user.save
-    sign_in @user
+    if user_signed_in?
+      @user = current_user
+    else
+      @user = User.new(name: user_params[:new_user_name], phone: user_params[:new_user_phone], email: user_params[:new_user_email], password: user_params[:new_user_password])
+      @user.save
+      sign_in @user
+    end
     @booking.user = @user
     @booking.status = "pending"
     @booking.save
