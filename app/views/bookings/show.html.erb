@@ -1,0 +1,22 @@
+<div class="order-container">
+  <h1>Order confirmation n°<%= @booking.id %></h1>
+  <div class="order-and-cleaner-container">
+    <div class="order">
+      <h3><%= @cleaner.name %> will take care of this booking between the <%= @booking.start_date.day %>/<%= @booking.start_date.month %> and the <%= @booking.end_date.day %>/<%= @booking.end_date.month %>.</h3>
+      <p>Price: <strong><%= @booking.price %>€</strong></p>
+      <p>Estimated time: <strong><%= @booking.estimated_time %></strong></p>
+      <p>Notes: <strong><%= @booking.further_info %></strong></p>
+    </div>
+    <div class="cleaner">
+      <h3><%= @cleaner.name %></h3>
+      <% if @cleaner.gender == "male" %>
+        <p class="gender-icon"><i class="fa-solid fa-mars"></i></p>
+      <% else %>
+        <p class="gender-icon"><i class="fa-solid fa-venus"></i></p>
+      <% end %>
+      <p><i class="fa-solid fa-phone"></i> +49 <%= @cleaner.phone %></p>
+      <p><i class="fa-solid fa-broom"></i> <%= @cleaner.experience %></p>
+      <p><%= @cleaner.description %></p>
+    </div>
+  </div>
+</div>

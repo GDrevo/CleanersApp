@@ -1,3 +1,5 @@
-<h4><%= cleaner.name %></h4>
-<h5><%= cleaner.experience %></h5>
-<p><%= cleaner.description %></p>
+<%= button_to booking_path(@booking, cleaner), method: 'put' do %>
+  <h4><%= cleaner.name %></h4>
+  <h5><i class="fa-solid fa-broom"></i> <%= cleaner.experience %></h5>
+  <p><%= cleaner.description %></p>
+<% end %>
