@@ -1,0 +1,35 @@
+.order-container {
+  padding: 100px;
+  padding-top: 50px;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.order-and-cleaner-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.order {
+  width: 55%;
+  padding: 50px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.2);
+}
+
+.cleaner {
+  width: 40%;
+  padding: 50px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.2);
+  h3 {
+    font-weight: bold;
+    text-align: center;
+  }
+  .gender-icon {
+    text-align: center;
+  }
+}

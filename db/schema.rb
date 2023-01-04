@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_30_180718) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_04_193951) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +20,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_30_180718) do
     t.string "status"
     t.string "cleaning_type"
     t.integer "price"
-    t.time "estimated_time"
     t.integer "number_of_visits"
     t.string "address"
     t.integer "size"
@@ -40,6 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_30_180718) do
     t.string "new_user_email"
     t.string "new_user_password"
     t.string "new_user_phone"
+    t.string "estimated_time"
     t.index ["cleaner_id"], name: "index_bookings_on_cleaner_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
