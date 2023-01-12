@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_04_193951) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_12_164528) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "availabilities", force: :cascade do |t|
+    t.time "start_time"
+    t.time "end_time"
+    t.integer "hours_available"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "cleaner_id"
+    t.index ["cleaner_id"], name: "index_availabilities_on_cleaner_id"
+  end
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "start_date"
@@ -32,7 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_193951) do
     t.string "further_info"
     t.string "house_type"
     t.bigint "user_id", null: false
-    t.bigint "cleaner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "new_user_name"
@@ -40,7 +49,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_193951) do
     t.string "new_user_password"
     t.string "new_user_phone"
     t.string "estimated_time"
-    t.index ["cleaner_id"], name: "index_bookings_on_cleaner_id"
+    t.bigint "availability_id"
+    t.index ["availability_id"], name: "index_bookings_on_availability_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
@@ -97,7 +107,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_193951) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "bookings", "cleaners"
   add_foreign_key "bookings", "users"
   add_foreign_key "houses", "users"
 end
